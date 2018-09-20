@@ -1,27 +1,8 @@
 import mill._
 import mill.scalalib._
-
-val crossMatrix = for {
-  crossVersion <- Seq("212")
-  platform <- Seq("jvm", "js")
-} yield (crossVersion, platform)
+import mill.scalajslib._
 
 object api extends Cross[Ced2arApiModule]("2.12.6")
-class Ced2arApiModule(val crossScalaVersion: String) extends CrossScalaModule { 
-
+class Ced2arApiModule(val crossScalaVersion: String) extends CrossScalaModule with ScalaJSModule { 
+  def scalaJSVersion = "0.6.22"
 }
-
-/*
-import mill._
-import mill.scalalib._
-
-val crossMatrix = for {
-  crossVersion <- Seq("212")
-  platform <- Seq("jvm", "js")
-} yield (crossVersion, platform)
-
-object api extends mill.Cross[Ced2arApiModule](crossMatrix:_*)
-class Ced2arApiModule(crossScalaVersion: String, platform: String) extends CrossScalaModule {
-  def suffix = T { crossScalaVersion + "_" + platform }
-}
-*/
