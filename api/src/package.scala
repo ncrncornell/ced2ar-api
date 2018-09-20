@@ -1,8 +1,9 @@
-package ed.cornell.ncrn.service
+package edu.cornell.ncrn.service.api
 import scala.collection.immutable.ListMap
+import scala.scalajs.js.annotation._
 
-
-package object api {
+@JSExportTopLevel("CED2AR")
+object api {
 
   // https://stackoverflow.com/questions/46672329/how-to-create-a-map-constructor-using-mapk-v-instead-of-mapk-v
 
