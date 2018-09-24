@@ -1,8 +1,9 @@
 import mill._
 import mill.scalalib._
 import mill.scalajslib._
+import mill.scalalib.publish._
 
-object api extends Cross[Ced2arApiModule]("2.12.6") {
+object api extends Cross[Ced2arApiModule]("2.12.6") with PublishModule {
   def artifactName = "ced2ar3-api"
   def publishVersion = "0.0.0"
   def pomSettings = PomSettings(
@@ -19,21 +20,21 @@ object api extends Cross[Ced2arApiModule]("2.12.6") {
       Developer("bbarker",
                 "Brandon Barker",
                 "https://www.cac.cornell.edu/barker/",
-                "Cornell University"),
+                Some("Cornell University")),
       Developer("larsvilhuber",
                 "Lars Vilhuber",
                 "https://www.ilr.cornell.edu/people/lars-vilhuber",
-                "Cornell University"),
+                Some("Cornell University")),
       Developer("CSimmer",
                 "Charles C Simmer",
                 "https://github.com/CSimmer",
-                "Cornell University")
+                Some("Cornell University"))
     )
   )
 }
+
 class Ced2arApiModule(val crossScalaVersion: String)
     extends CrossScalaModule
-    with ScalaJSModule
-    with PublishModule {
+    with ScalaJSModule {
   def scalaJSVersion = "0.6.25"
 }
