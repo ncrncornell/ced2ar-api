@@ -11,13 +11,15 @@ object api {
     type Out <: Iterable[B]
   }
 
-  implicit def defaultCanBuildIterable[A[X] <: Iterable[X], B] = new CanBuildIterable[A[_], B] {
-    type Out = A[B]
-  }
+  implicit def defaultCanBuildIterable[A[X] <: Iterable[X], B] =
+    new CanBuildIterable[A[_], B] {
+      type Out = A[B]
+    }
 
-  implicit def mapCanBuildIterable[K, V] = new CanBuildIterable[Map[_, _], (K, V)] {
-    type Out = Map[K, V]
-  }
+  implicit def mapCanBuildIterable[K, V] =
+    new CanBuildIterable[Map[_, _], (K, V)] {
+      type Out = Map[K, V]
+    }
 
   // See https://stackoverflow.com/questions/46669194/how-to-get-the-parameter-of-a-type-constructor-in-scala/46671710#46671710
   // For possible improvements in using the API
@@ -45,7 +47,5 @@ object api {
   type VarDetailItem = (VarNameId, List[VarValue])
   type VarDetailCollection[+A] = List[A]
   type VarDetails = VarDetailCollection[VarDetailItem]
-
-
 
 }
