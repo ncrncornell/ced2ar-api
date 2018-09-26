@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mill --color false api.publish \
+mill --color false api[2.12.6].publish \
   --sonatypeCreds bbarker:$SONATYPE_PASSWORD \
   --gpgPassphrase $GPG_PASSWORD \
   --release true

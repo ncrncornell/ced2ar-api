@@ -3,7 +3,14 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalalib.publish._
 
-object api extends Cross[Ced2arApiModule]("2.12.6") with PublishModule {
+object api extends Cross[Ced2arApiModule]("2.12.6") {
+}
+
+class Ced2arApiModule(val crossScalaVersion: String)
+    extends CrossScalaModule
+    with ScalaJSModule
+    with PublishModule {    
+  def scalaJSVersion = "0.6.25"
   def artifactName = "ced2ar3-api"
   def publishVersion = "0.0.0"
   def pomSettings = PomSettings(
@@ -31,10 +38,5 @@ object api extends Cross[Ced2arApiModule]("2.12.6") with PublishModule {
                 Some("Cornell University"))
     )
   )
-}
-
-class Ced2arApiModule(val crossScalaVersion: String)
-    extends CrossScalaModule
-    with ScalaJSModule {
-  def scalaJSVersion = "0.6.25"
+  
 }
