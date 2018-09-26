@@ -19,7 +19,7 @@ class Ced2arApiModule(val crossScalaVersion: String)
       | Access Repository (AAR) was designed to improve the documentation and
       | discoverability of both public and restricted data. Version 3 is a
       | modular implementaiton of CED2AR.""".stripMargin.replaceAll("\n", " "),
-    organization = "Cornell University",
+    organization = "edu.cornell.ncrn.ced2ar",
     url = "https://github.com/ncrncornell/ced2ar-api",
     licenses = Seq(License.`CC-BY-NC-SA-4.0`),
     versionControl = VersionControl.github("ncrncornell", "ced2ar-api"),
