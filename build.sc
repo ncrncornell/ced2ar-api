@@ -3,8 +3,13 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalalib.publish._
 
-object api extends Cross[Ced2arApiModule]("2.12.6") {
-}
+val crossMatrix = for {
+  crossVersion <- Seq("2.12.6")
+  platform <- Seq("jvm", "js", "native")
+  // if !(platform == "native" && crossVersion != "212")
+} yield (crossVersion, platform)
+
+object api extends Cross[Ced2arApiModule](crossMatrix: _*)
 
 class Ced2arApiModule(val crossScalaVersion: String)
     extends CrossScalaModule
