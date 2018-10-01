@@ -6,8 +6,8 @@ import mill.scalalib.publish._
 val crossMatrix = for {
   crossVersion <- Seq("2.12.6")
   platform <- Seq("jvm", "js", "native")
-  // if !(platform == "native" && crossVersion != "212")
-} yield (crossVersion, platform)
+  if !(platform == "native")
+} yield (platform, crossVersion)
 
 val apiFolder: String = "api"
 
@@ -21,12 +21,16 @@ class Ced2arApiModule(val crossScalaVersion: String)
     extends CrossScalaModule
     with ScalaJSModule
     with PublishModule {
+
+  /*
   def sources = T.sources(
     build.millSourcePath /apiFolder / "src" 
   )
+  */
+
   def scalaJSVersion = "0.6.25"
   def artifactName = "ced2ar3-api"
-  def publishVersion = "0.0.1"
+  def publishVersion = "0.0.2"
   def pomSettings = PomSettings(
     description =
       """Comprehensive Extensible Data Documentation and
