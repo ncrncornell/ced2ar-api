@@ -9,12 +9,21 @@ val crossMatrix = for {
   // if !(platform == "native" && crossVersion != "212")
 } yield (crossVersion, platform)
 
-object api extends Cross[Ced2arApiModule](crossMatrix: _*)
+val apiFolder: String = "api"
+
+trait ObjName { self => def objName = self.getClass.getName.split("\\$").last } 
+
+object api extends Cross[Ced2arApiModule](crossMatrix: _*) with ObjName {
+  assert(objName == apiFolder)
+}
 
 class Ced2arApiModule(val crossScalaVersion: String)
     extends CrossScalaModule
     with ScalaJSModule
-    with PublishModule {    
+    with PublishModule {
+  def sources = T.sources(
+    build.millSourcePath /apiFolder / "src" 
+  )
   def scalaJSVersion = "0.6.25"
   def artifactName = "ced2ar3-api"
   def publishVersion = "0.0.0"
