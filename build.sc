@@ -26,7 +26,7 @@ class Ced2arApiModule(val crossScalaVersion: String)
   )
   def scalaJSVersion = "0.6.25"
   def artifactName = "ced2ar3-api"
-  def publishVersion = "0.0.0"
+  def publishVersion = "0.0.1"
   def pomSettings = PomSettings(
     description =
       """Comprehensive Extensible Data Documentation and
