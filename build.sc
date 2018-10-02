@@ -9,26 +9,36 @@ val crossMatrix = for {
   if !(platform == "native")
 } yield (platform, crossVersion)
 
-val apiFolder: String = "api"
+val scalaVersions = List("2.11.12", "2.12.6")
 
-trait ObjName { self => def objName = self.getClass.getName.split("\\$").last } 
 
-object api extends Cross[Ced2arApiModule](crossMatrix: _*) with ObjName {
-  assert(objName == apiFolder)
+object api extends Module {
+
+  class ApiJvmModule(val crossScalaVersion: String)
+      extends Ced2arApiModule {
+    def platformSegment = "jvm" 
+  }
+  object jvm extends Cross[ApiJvmModule](scalaVersions: _*)
+
+  class ApiJsModule(val crossScalaVersion: String)
+      extends Ced2arApiModule
+      with ScalaJSModule {
+    def platformSegment = "js"
+    def scalaJSVersion = "0.6.25"
+  }
+  object js extends Cross[ApiJsModule](scalaVersions: _*)
+
 }
 
-class Ced2arApiModule(val crossScalaVersion: String)
-    extends CrossScalaModule
-    with ScalaJSModule
+trait Ced2arApiModule
+    extends CommonModule
+    with CrossScalaModule
     with PublishModule {
 
-  /*
-  def sources = T.sources(
-    build.millSourcePath /apiFolder / "src" 
-  )
-  */
+  val apiFolder: String = "api"
+  def millSourcePath = build.millSourcePath / apiFolder
 
-  def scalaJSVersion = "0.6.25"
+
   def artifactName = "ced2ar3-api"
   def publishVersion = "0.0.2"
   def pomSettings = PomSettings(
@@ -57,4 +67,36 @@ class Ced2arApiModule(val crossScalaVersion: String)
     )
   )
   
+}
+
+
+trait CommonModule extends ScalaModule {
+
+  def platformSegment: String
+
+  def sources = T.sources(
+    millSourcePath / "src",
+    millSourcePath / s"src-$platformSegment"
+  )
+
+  def scalacOptions = Seq(
+    "-Ypartial-unification",
+    "-language:higherKinds",
+    "-deprecation",
+    "-feature"
+  )
+   
+  /*
+  def ivyDeps = Agg(
+    ivy"org.typelevel::cats-core::$catsVersion",
+    ivy"org.typelevel::cats-free::$catsVersion",
+    ivy"com.lihaoyi::fastparse::$fastparseVersion",
+    ivy"com.github.mpilquist::simulacrum::$simulacrumVersion"
+  )
+
+  def scalacPluginIvyDeps = super.scalacPluginIvyDeps() ++ Agg(
+    ivy"org.spire-math::kind-projector:$kindProjectorVersion",
+    ivy"org.scalamacros:::paradise:$macroParadiseVersion"
+  )
+  */
 }
