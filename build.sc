@@ -71,12 +71,12 @@ trait Ced2arApiModule
 
 
 trait CommonModule extends ScalaModule {
-
+  
   def platformSegment: String
 
   def sources = T.sources(
-    millSourcePath / "src",
-    millSourcePath / s"src-$platformSegment"
+    millSourcePath / platformSegment / "src"  ,
+    millSourcePath / "shared" / "src"  ,
   )
 
   def scalacOptions = Seq(
