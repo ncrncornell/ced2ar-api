@@ -1,4 +1,5 @@
-package edu.cornell.ncrn.service.api
+package edu.cornell.ncrn.ced2ar.service
+
 import scala.collection.immutable.ListMap
 
 trait Ced2arApi {
