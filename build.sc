@@ -40,7 +40,7 @@ trait Ced2arApiModule
 
 
   def artifactName = "ced2ar3-api"
-  def publishVersion = "0.0.2"
+  def publishVersion = "0.0.3"
   def pomSettings = PomSettings(
     description =
       """Comprehensive Extensible Data Documentation and
