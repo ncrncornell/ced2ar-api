@@ -3,13 +3,7 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalalib.publish._
 
-val crossMatrix = for {
-  crossVersion <- Seq("2.12.6")
-  platform <- Seq("jvm", "js", "native")
-  if !(platform == "native")
-} yield (platform, crossVersion)
-
-val scalaVersions = List("2.11.12", "2.12.6")
+val scalaVersions = List("2.11.12", "2.12.7")
 
 
 object api extends Module {
