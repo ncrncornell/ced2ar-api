@@ -80,17 +80,4 @@ trait CommonModule extends ScalaModule {
     "-feature"
   )
    
-  /*
-  def ivyDeps = Agg(
-    ivy"org.typelevel::cats-core::$catsVersion",
-    ivy"org.typelevel::cats-free::$catsVersion",
-    ivy"com.lihaoyi::fastparse::$fastparseVersion",
-    ivy"com.github.mpilquist::simulacrum::$simulacrumVersion"
-  )
-
-  def scalacPluginIvyDeps = super.scalacPluginIvyDeps() ++ Agg(
-    ivy"org.spire-math::kind-projector:$kindProjectorVersion",
-    ivy"org.scalamacros:::paradise:$macroParadiseVersion"
-  )
-  */
 }
